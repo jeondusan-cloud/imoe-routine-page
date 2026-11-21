@@ -4,9 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="배경을 해치지 않는 투명 글래스로 월~일 루틴을 자동 전환해 띄워두는 Windows 무료 바탕화면 위젯 IMOE_ROUTINE" />
+  <link rel="canonical" href="https://jeondusan-cloud.github.io/imoe-routine-page/" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jeondusan-cloud.github.io/imoe-routine-page/" />
   <meta property="og:title" content="IMOE_ROUTINE — 무료 바탕화면 투명 글래스 주간 루틴 위젯" />
   <meta property="og:description" content="요일마다 자정에 자동 전환, 체크박스 ON/OFF, 투명 글래스·컬러 포인트 바, 별도 편집 창. 100% 무료 다운로드." />
+  <meta property="og:image" content="https://jeondusan-cloud.github.io/imoe-routine-page/assets/og-preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="IMOE_ROUTINE — 무료 바탕화면 투명 글래스 주간 루틴 위젯" />
+  <meta name="twitter:description" content="요일마다 자정에 자동 전환, 체크박스 ON/OFF, 투명 글래스·컬러 포인트 바, 별도 편집 창. 100% 무료 다운로드." />
+  <meta name="twitter:image" content="https://jeondusan-cloud.github.io/imoe-routine-page/assets/og-preview.png" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%23161b26'/%3E%3Cpath d='M4 15a11 11 0 0 1 11-11h34a11 11 0 0 1 11 11v2H4v-2z' fill='%234dabf7'/%3E%3Ccircle cx='19' cy='29' r='4.5' fill='%234dabf7'/%3E%3Crect x='28' y='26.5' width='22' height='5' rx='2.5' fill='%23f5f9ff'/%3E%3Ccircle cx='19' cy='40' r='3.5' fill='%23cbd6e6'/%3E%3Crect x='28' y='37.5' width='18' height='5' rx='2.5' fill='%23cbd6e6'/%3E%3Ccircle cx='19' cy='50' r='3.5' fill='%23cbd6e6'/%3E%3Crect x='28' y='47.5' width='14' height='5' rx='2.5' fill='%23cbd6e6'/%3E%3C/svg%3E" />
   <title>IMOE_ROUTINE — 무료 바탕화면 투명 글래스 주간 루틴 위젯</title>
   <style>
@@ -220,6 +229,9 @@
       position: absolute;
       bottom: 10px;
       left: 14px;
+      right: 14px;
+      width: fit-content;
+      max-width: calc(100% - 28px);
       font-size: 11px;
       font-weight: 600;
       color: rgba(255, 255, 255, 0.92);
@@ -238,6 +250,8 @@
     /* Live Routine Widget inside Demo */
     .routine-widget {
       --accent: #4dabf7;
+      --accent-fg: #ffffff;
+      --accent-text: #4dabf7;
       --w-text: #111318;
       --w-sub: #252a34;
       --w-muted: #3e4656;
@@ -256,6 +270,7 @@
       display: flex;
       flex-direction: column;
       cursor: grab;
+      touch-action: none;
       z-index: 3;
       transition: color 0.14s ease;
     }
@@ -292,7 +307,7 @@
     .widget-tag {
       font-size: 11px;
       font-weight: 700;
-      color: var(--accent);
+      color: var(--accent-text);
       letter-spacing: -0.01em;
     }
     .widget-flags {
@@ -343,7 +358,7 @@
       background: var(--accent);
       border-color: var(--accent);
     }
-    .widget-chk svg { width: 9px; height: 9px; color: #fff; opacity: 0; }
+    .widget-chk svg { width: 9px; height: 9px; color: var(--accent-fg); opacity: 0; }
     .widget-row.done .widget-chk svg { opacity: 1; }
     .widget-dot {
       width: 5.5px;
@@ -383,7 +398,7 @@
     }
     .routine-widget:hover .widget-hover-bar,
     .routine-widget.mini-open .widget-hover-bar,
-    .routine-widget.demo-peek .widget-hover-bar {
+    .widget-hover-bar:focus-within {
       opacity: 1;
       pointer-events: auto;
     }
@@ -441,6 +456,7 @@
       width: 14px;
       height: 14px;
       cursor: nwse-resize;
+      touch-action: none;
       display: none;
       align-items: flex-end;
       justify-content: flex-end;
@@ -537,7 +553,7 @@
       background: #f8fbff;
     }
 
-    .pricing-single { max-width: 560px; margin: 0 auto; }
+    .pricing-single { max-width: 580px; margin: 0 auto; }
     .price-card {
       background: var(--card);
       border: 2px solid var(--primary);
@@ -561,6 +577,49 @@
     .price-list { list-style: none; margin: 18px 0 24px; }
     .price-list li { margin-bottom: 9px; font-size: 14.5px; }
     .buy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .download-meta-row {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+    .checksum-details {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .checksum-details summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--text);
+      outline: none;
+    }
+    .checksum-body {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 11px;
+      word-break: break-all;
+    }
+    .checksum-links {
+      margin-top: 6px;
+      font-family: inherit;
+      font-size: 12px;
+    }
+    .checksum-links a {
+      color: #1971c2;
+      font-weight: 700;
+      text-decoration: underline;
+    }
 
     footer {
       padding: 36px 0;
@@ -584,6 +643,7 @@
     }
     .modal-backdrop.open { display: flex; }
     .modal-dialog {
+      position: relative;
       width: min(420px, 100%);
       max-height: 90vh;
       background: rgba(252, 253, 255, 0.99);
@@ -727,10 +787,34 @@
       cursor: pointer;
     }
     .modal-setting-row input[type="checkbox"] { accent-color: #339af0; width: 16px; height: 16px; cursor: pointer; }
+    .modal-toast {
+      position: absolute;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(24, 28, 36, 0.9);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 20;
+    }
+    .modal-toast[hidden] { display: none; }
 
     @media (max-width: 860px) {
-      .hero, .features-grid, .faq-grid, .compare-grid, .buy-grid { grid-template-columns: 1fr; }
+      .hero, .features-grid, .faq-grid, .compare-grid, .buy-grid, .download-meta-row { grid-template-columns: 1fr; }
       .demo-cta-bar { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 30px; }
+      .routine-widget {
+        left: 16px;
+        top: 20px;
+        width: min(288px, calc(100% - 32px));
+      }
     }
   </style>
 </head>
@@ -738,7 +822,7 @@
   <div class="container">
     <header>
       <div class="logo">
-        <img class="logo-icon" src="assets/icon.png" alt="IMOE_ROUTINE 아이콘" />
+        <img id="logoIcon" class="logo-icon" src="assets/icon.png" alt="IMOE_ROUTINE 아이콘" />
         <span class="logo-badge">ROUTINE</span>
         <span>IMOE_ROUTINE</span>
       </div>
@@ -789,7 +873,7 @@
         </div>
 
         <div id="demoCanvas" class="desktop-canvas theme-sky">
-          <div id="demoWidget" class="routine-widget demo-peek">
+          <div id="demoWidget" class="routine-widget">
             <div id="demoWidgetAccent" class="widget-accent"></div>
             <div class="widget-inner">
               <div class="widget-tag-row">
@@ -851,7 +935,7 @@
           </ul>
         </div>
         <div class="compare-card highlight">
-          <span class="compare-badge" data-ko="IMOE_ROUTINE v1.0" data-en="IMOE_ROUTINE v1.0">IMOE_ROUTINE v1.0</span>
+          <span class="compare-badge" data-ko="IMOE_ROUTINE v1.0.1" data-en="IMOE_ROUTINE v1.0.1">IMOE_ROUTINE v1.0.1</span>
           <h3 data-ko="배경은 살리고 루틴만 선명하게" data-en="Pure Transparent Glass, Zero Clutter">배경은 살리고 루틴만 선명하게</h3>
           <ul class="compare-list">
             <li data-ko="✓ 배경을 해치지 않는 순수 투명 글래스 + 포인트 바" data-en="✓ Frameless transparent glass with top accent strip">✓ 배경을 해치지 않는 순수 투명 글래스 + 포인트 바</li>
@@ -887,7 +971,7 @@
         </div>
         <div class="feature-card">
           <h3 data-ko="⚡ 100% 오프라인 로컬 저장" data-en="⚡ 100% Offline &amp; Local JSON">⚡ 100% 오프라인 로컬 저장</h3>
-          <p data-ko="서버 전송이나 계정 로그인 없이 모든 루틴이 내 PC의 로컬 JSON 파일에 안전하게 저장됩니다. 시작 시 자동 실행 옵션도 지원합니다." data-en="Zero accounts or cloud tracking — your routines stay safely in local JSON on your PC, with optional Launch at Startup.">서버 전송이나 계정 로그인 없이 모든 루틴이 내 PC의 로컬 JSON 파일에 안전하게 저장됩니다. 시작 시 자동 실행 옵션도 지원합니다.</p>
+          <p data-ko="서버 전송이나 계정 로그인 없이 모든 루틴이 내 PC의 로컬 JSON(+직전 백업)에 안전하게 저장됩니다. 포터블·설치형 모두 시작 시 자동 실행을 지원합니다." data-en="Zero accounts or cloud tracking — your routines stay safely in local JSON (+rolling backup) on your PC, with Launch at Startup support.">서버 전송이나 계정 로그인 없이 모든 루틴이 내 PC의 로컬 JSON(+직전 백업)에 안전하게 저장됩니다. 포터블·설치형 모두 시작 시 자동 실행을 지원합니다.</p>
         </div>
       </div>
     </section>
@@ -897,7 +981,7 @@
       <div class="pricing-single">
         <div class="price-card">
           <span class="price-badge">100% FREE · BY IMOE</span>
-          <h3 data-ko="IMOE_ROUTINE v1.0 (Windows 10 / 11)" data-en="IMOE_ROUTINE v1.0 (Windows 10 / 11)">IMOE_ROUTINE v1.0 (Windows 10 / 11)</h3>
+          <h3 data-ko="IMOE_ROUTINE v1.0.1 (Windows 10 / 11 · 64-bit)" data-en="IMOE_ROUTINE v1.0.1 (Windows 10 / 11 · 64-bit)">IMOE_ROUTINE v1.0.1 (Windows 10 / 11 · 64-bit)</h3>
           <div class="price-tag" data-ko="무료 (FREE)" data-en="FREE ($0)">무료 (FREE)</div>
           <div class="price-sub" data-ko="회원가입·구독·광고 없이 누구나 평생 무료로 사용하세요" data-en="100% free forever with zero accounts, subscriptions, or ads">회원가입·구독·광고 없이 누구나 평생 무료로 사용하세요</div>
           <ul class="price-list">
@@ -908,9 +992,23 @@
             <li data-ko="✓ 무설치 포터블(.EXE) &amp; 정식 설치형(Setup .EXE) 모두 제공" data-en="✓ Both Portable (.EXE) and Installer (Setup .EXE) available">✓ 무설치 포터블(.EXE) &amp; 정식 설치형(Setup .EXE) 모두 제공</li>
           </ul>
           <div class="buy-grid">
-            <a id="downloadPortableBtn" href="https://github.com/jeondusan-cloud/jeondusan-cloud-imoe-routine-page/releases/download/v1.0.0/IMOE_ROUTINE-1.0.0-Portable.exe" class="btn btn-primary" style="text-align:center;" data-ko="포터블 무료 다운로드 (.EXE)" data-en="Download Portable (.EXE)">포터블 무료 다운로드 (.EXE)</a>
-            <a id="downloadSetupBtn" href="https://github.com/jeondusan-cloud/jeondusan-cloud-imoe-routine-page/releases/download/v1.0.0/IMOE_ROUTINE-Setup-1.0.0.exe" class="btn btn-secondary" style="text-align:center;" data-ko="설치형 다운로드 (Setup .EXE)" data-en="Download Installer (Setup .EXE)">설치형 다운로드 (Setup .EXE)</a>
+            <a id="downloadPortableBtn" href="https://github.com/jeondusan-cloud/imoe-routine-page/releases/download/v1.0.1/IMOE_ROUTINE-1.0.1-Portable.exe" class="btn btn-primary" style="text-align:center;" data-ko="포터블 무료 다운로드 (.EXE)" data-en="Download Portable (.EXE)">포터블 무료 다운로드 (.EXE)</a>
+            <a id="downloadSetupBtn" href="https://github.com/jeondusan-cloud/imoe-routine-page/releases/download/v1.0.1/IMOE_ROUTINE-Setup-1.0.1.exe" class="btn btn-secondary" style="text-align:center;" data-ko="설치형 다운로드 (Setup .EXE)" data-en="Download Installer (Setup .EXE)">설치형 다운로드 (Setup .EXE)</a>
           </div>
+          <div class="download-meta-row">
+            <span data-ko="포터블 · 105.2 MB · Win 10/11 (x64)" data-en="Portable · 105.2 MB · Win 10/11 (x64)">포터블 · 105.2 MB · Win 10/11 (x64)</span>
+            <span data-ko="설치형 · 115.7 MB · Win 10/11 (x64)" data-en="Setup · 115.7 MB · Win 10/11 (x64)">설치형 · 115.7 MB · Win 10/11 (x64)</span>
+          </div>
+          <details class="checksum-details">
+            <summary data-ko="SHA-256 무결성 검증 해시 및 릴리즈 페이지 보기" data-en="View SHA-256 Checksums &amp; GitHub Release">SHA-256 무결성 검증 해시 및 릴리즈 페이지 보기</summary>
+            <div class="checksum-body">
+              <div><strong>Portable:</strong> 151a247b542eef303b25640a93a748a54fc287dd70eab1de20aa8e165db5077f</div>
+              <div><strong>Setup:</strong> 83e8b08d635491d981779e051cb75cc0840ffbb303ed29d26e03e334539cd28f</div>
+              <div class="checksum-links">
+                <a href="https://github.com/jeondusan-cloud/imoe-routine-page/releases/tag/v1.0.1" target="_blank" rel="noopener noreferrer" data-ko="GitHub Releases v1.0.1 전체 보기 →" data-en="View GitHub Release v1.0.1 →">GitHub Releases v1.0.1 전체 보기 →</a>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
     </section>
@@ -920,11 +1018,11 @@
       <div class="features-grid faq-grid">
         <div class="feature-card">
           <h3 data-ko="포터블 버전과 설치형 버전의 차이는 무엇인가요?" data-en="Portable vs. Installer — what's the difference?">포터블 버전과 설치형 버전의 차이는 무엇인가요?</h3>
-          <p data-ko="포터블(.EXE)은 설치 과정 없이 파일 하나만 받아 바로 실행할 수 있어 가볍습니다. 설치형(Setup .EXE)은 시작 메뉴 등록, 제어판 제거, 윈도우 시작 시 자동 실행에 최적화되어 있습니다." data-en="Portable (.EXE) runs immediately as a single file with no setup. The Installer (Setup .EXE) adds Start Menu shortcuts and clean Launch-at-Startup support.">포터블(.EXE)은 설치 과정 없이 파일 하나만 받아 바로 실행할 수 있어 가볍습니다. 설치형(Setup .EXE)은 시작 메뉴 등록, 제어판 제거, 윈도우 시작 시 자동 실행에 최적화되어 있습니다.</p>
+          <p data-ko="포터블(.EXE)은 별도 설치 과정 없이 단일 파일로 바로 실행되며(실행 시 임시 폴더에 자동 전개), 설치형(Setup .EXE)은 고정 경로에 설치되어 더 빠른 실행 속도·시작 메뉴 등록·제어판 제거·윈도우 시작 시 자동 실행에 최적화되어 있습니다." data-en="Portable (.EXE) runs directly from a single file without installation (auto-extracting cleanly on launch). The Installer (Setup .EXE) installs to a fixed folder for faster startup, Start Menu shortcuts, clean uninstall, and startup support.">포터블(.EXE)은 별도 설치 과정 없이 단일 파일로 바로 실행되며(실행 시 임시 폴더에 자동 전개), 설치형(Setup .EXE)은 고정 경로에 설치되어 더 빠른 실행 속도·시작 메뉴 등록·제어판 제거·윈도우 시작 시 자동 실행에 최적화되어 있습니다.</p>
         </div>
         <div class="feature-card">
           <h3 data-ko="루틴 데이터는 어디에 저장되나요?" data-en="Where is my routine data stored?">루틴 데이터는 어디에 저장되나요?</h3>
-          <p data-ko="사용자 PC의 로컬 AppData(imoe-routine/routine-data.json)에 저장되며 손상 방지 원자적 쓰기를 사용합니다. 외부 서버 전송은 0%입니다." data-en="All routines stay offline in your PC's local AppData folder using atomic writes. Zero data is ever sent to any external server.">사용자 PC의 로컬 AppData(imoe-routine/routine-data.json)에 저장되며 손상 방지 원자적 쓰기를 사용합니다. 외부 서버 전송은 0%입니다.</p>
+          <p data-ko="사용자 PC의 로컬 AppData(imoe-routine/routine-data.json)에 저장되며 원자적 쓰기와 직전 정상 백업(.bak.json) 자동 복구를 지원합니다. 외부 서버 전송은 0%입니다." data-en="All routines stay offline in your PC's local AppData folder using atomic writes and automatic rolling backup (.bak.json) recovery. Zero data leaves your PC.">사용자 PC의 로컬 AppData(imoe-routine/routine-data.json)에 저장되며 원자적 쓰기와 직전 정상 백업(.bak.json) 자동 복구를 지원합니다. 외부 서버 전송은 0%입니다.</p>
         </div>
         <div class="feature-card">
           <h3 data-ko="요일이 바뀌면 체크 표시도 초기화되나요?" data-en="Do checkmarks reset when the day changes?">요일이 바뀌면 체크 표시도 초기화되나요?</h3>
@@ -932,7 +1030,7 @@
         </div>
         <div class="feature-card">
           <h3 data-ko="정말 무료인가요? 문의처는 어디인가요?" data-en="Is it really 100% free? Contact?">정말 무료인가요? 문의처는 어디인가요?</h3>
-          <p data-ko="네, 광고·결제·기능 제한이 전혀 없는 100% 무료 앱입니다(IMOE 배포). 오류 제보 및 문의: jeondusan@gmail.com" data-en="Yes, 100% freeware by IMOE with no ads, paywalls, or locked features. Contact &amp; bug reports: jeondusan@gmail.com">네, 광고·결제·기능 제한이 전혀 없는 100% 무료 앱입니다(IMOE 배포). 오류 제보 및 문의: jeondusan@gmail.com</p>
+          <p data-ko="네, 광고·결제·기능 제한이 전혀 없는 100% 무료 앱입니다(IMOE 배포). 오류 제보 및 문의: <span class='contact-email-slot'></span>" data-en="Yes, 100% freeware by IMOE with no ads, paywalls, or locked features. Contact &amp; bug reports: <span class='contact-email-slot'></span>">네, 광고·결제·기능 제한이 전혀 없는 100% 무료 앱입니다(IMOE 배포). 오류 제보 및 문의: <span class="contact-email-slot"></span></p>
         </div>
         <div class="feature-card faq-card-full">
           <h3 data-ko="무료 앱 안전성과 처음 실행 시 윈도우 보호 창(SmartScreen)이 뜨면?" data-en="Why does Windows SmartScreen appear on first launch?">무료 앱 안전성과 처음 실행 시 윈도우 보호 창(SmartScreen)이 뜨면?</h3>
@@ -942,13 +1040,13 @@
     </section>
 
     <footer>
-      <span data-ko="IMOE_ROUTINE v1.0 · Windows 10 / 11 바탕화면 투명 글래스 주간 루틴 위젯" data-en="IMOE_ROUTINE v1.0 · Windows 10 / 11 Transparent Glass Weekly Routine Widget">IMOE_ROUTINE v1.0 · Windows 10 / 11 바탕화면 투명 글래스 주간 루틴 위젯</span>
+      <span data-ko="IMOE_ROUTINE v1.0.1 · Windows 10 / 11 바탕화면 투명 글래스 주간 루틴 위젯" data-en="IMOE_ROUTINE v1.0.1 · Windows 10 / 11 Transparent Glass Weekly Routine Widget">IMOE_ROUTINE v1.0.1 · Windows 10 / 11 바탕화면 투명 글래스 주간 루틴 위젯</span>
       <div style="margin-top: 8px; font-size: 12.5px;">
         <span data-ko="문의 및 기술 지원: " data-en="Support: ">문의 및 기술 지원: </span>
-        <a href="mailto:jeondusan@gmail.com" style="color: inherit; text-decoration: underline;">jeondusan@gmail.com</a>
+        <span class="contact-email-slot"></span>
         <span> · </span>
         <span data-ko="자매 위젯: " data-en="Sister App: ">자매 위젯: </span>
-        <a href="https://jeondusan-cloud.github.io/onetwoday-page/" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">IMOE_DDAY</a>
+        <a href="https://jeondusan-cloud.github.io/onetwoday-page/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">IMOE_DDAY</a>
       </div>
     </footer>
   </div>
@@ -992,6 +1090,7 @@
           <input id="modalLockChk" type="checkbox" />
         </label>
       </div>
+      <div id="modalToast" class="modal-toast" role="status" aria-live="polite" hidden></div>
     </div>
   </div>
 
@@ -1004,6 +1103,9 @@
       var DAY_FULL_KO = { mon: '월요일', tue: '화요일', wed: '수요일', thu: '목요일', fri: '금요일', sat: '토요일', sun: '일요일' };
       var DAY_FULL_EN = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };
       var COLORS = ['#4DABF7', '#FF6B6B', '#51CF66', '#AE3EC9', '#FCC419', '#FF922B'];
+
+      var TITLE_KO = 'IMOE_ROUTINE — 무료 바탕화면 투명 글래스 주간 루틴 위젯';
+      var TITLE_EN = 'IMOE_ROUTINE — Free Transparent Weekly Routine Widget for Windows';
 
       var SVG_PIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(42 12 12)"><path d="M12 16.5v5"/><path d="M9.2 10.5a1.8 1.8 0 0 1-1 1.6l-1.5.8a1.6 1.6 0 0 0-.9 1.4V15a1 1 0 0 0 1 1h10.4a1 1 0 0 0 1-1v-.7a1.6 1.6 0 0 0-.9-1.4l-1.5-.8a1.8 1.8 0 0 1-1-1.6V7a1 1 0 0 1 .9-1 1.8 1.8 0 0 0 0-3.5H8.3a1.8 1.8 0 0 0 0 3.5 1 1 0 0 1 .9 1z"/></g></svg>';
       var SVG_LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="14.7" r="1" fill="currentColor" stroke="none"/><path d="M12 15.5v2"/></svg>';
@@ -1026,17 +1128,46 @@
         topmost: false,
         locked: false,
         routines: {
-          mon: [{ text: '물 500ml 마시기', done: true }, { text: '영단어 30개 복습', done: false }, { text: '퇴근 후 스트레칭', done: false }],
-          tue: [{ text: '물 500ml 마시기', done: false }, { text: '헬스장 유산소 30분', done: false }, { text: '기술 블로그 1편 읽기', done: false }],
-          wed: [{ text: '물 500ml 마시기', done: false }, { text: '영어 섀도잉 20분', done: false }, { text: '책상 정리하기', done: false }],
-          thu: [{ text: '물 500ml 마시기', done: false }, { text: '근력 운동 루틴', done: false }, { text: '가계부 정리', done: false }],
-          fri: [{ text: '물 500ml 마시기', done: false }, { text: '주간 회고 작성', done: false }, { text: '주말 장보기 메모', done: false }],
-          sat: [{ text: '아침 스트레칭 15분', done: true }, { text: '영단어 30개 복습', done: false }, { text: '물 2L 마시기', done: false }],
-          sun: [{ text: '방 환기 & 침구 정리', done: false }, { text: '다음 주 루틴 점검', done: false }, { text: '일찍 잠자리에 들기', done: false }]
+          mon: [
+            { ko: '물 500ml 마시기', en: 'Drink 500ml water', done: true },
+            { ko: '영단어 30개 복습', en: 'Review 30 vocabulary words', done: false },
+            { ko: '퇴근 후 스트레칭', en: 'Evening stretching', done: false }
+          ],
+          tue: [
+            { ko: '물 500ml 마시기', en: 'Drink 500ml water', done: false },
+            { ko: '헬스장 유산소 30분', en: '30m cardio workout', done: false },
+            { ko: '기술 블로그 1편 읽기', en: 'Read 1 tech article', done: false }
+          ],
+          wed: [
+            { ko: '물 500ml 마시기', en: 'Drink 500ml water', done: false },
+            { ko: '영어 섀도잉 20분', en: '20m English shadowing', done: false },
+            { ko: '책상 정리하기', en: 'Tidy up desk', done: false }
+          ],
+          thu: [
+            { ko: '물 500ml 마시기', en: 'Drink 500ml water', done: false },
+            { ko: '근력 운동 루틴', en: 'Strength training routine', done: false },
+            { ko: '가계부 정리', en: 'Update expense log', done: false }
+          ],
+          fri: [
+            { ko: '물 500ml 마시기', en: 'Drink 500ml water', done: false },
+            { ko: '주간 회고 작성', en: 'Write weekly reflection', done: false },
+            { ko: '주말 장보기 메모', en: 'Plan weekend groceries', done: false }
+          ],
+          sat: [
+            { ko: '아침 스트레칭 15분', en: '15m morning stretch', done: true },
+            { ko: '영단어 30개 복습', en: 'Review 30 vocabulary words', done: false },
+            { ko: '물 2L 마시기', en: 'Drink 2L water', done: false }
+          ],
+          sun: [
+            { ko: '방 환기 & 침구 정리', en: 'Air room & make bed', done: false },
+            { ko: '다음 주 루틴 점검', en: 'Review next week routines', done: false },
+            { ko: '일찍 잠자리에 들기', en: 'Sleep early tonight', done: false }
+          ]
         }
       };
 
       var langBtn = document.getElementById('langToggleBtn');
+      var logoIcon = document.getElementById('logoIcon');
       var demoCanvas = document.getElementById('demoCanvas');
       var demoWidget = document.getElementById('demoWidget');
       var demoWidgetAccent = document.getElementById('demoWidgetAccent');
@@ -1076,6 +1207,65 @@
       var modalChkBox = document.getElementById('modalChkBox');
       var modalTopmostChk = document.getElementById('modalTopmostChk');
       var modalLockChk = document.getElementById('modalLockChk');
+      var modalToast = document.getElementById('modalToast');
+      var modalToastTimer = null;
+
+      function renderEmailLinks() {
+        var user = 'jeondusan';
+        var domain = 'gmail.com';
+        var addr = user + '@' + domain;
+        document.querySelectorAll('.contact-email-slot').forEach(function (slot) {
+          slot.innerHTML = '';
+          var a = document.createElement('a');
+          a.href = 'mai' + 'lto:' + addr;
+          a.textContent = addr;
+          a.style.cssText = 'color: inherit; text-decoration: underline;';
+          slot.appendChild(a);
+        });
+      }
+
+      function getLuminance(hex) {
+        var m = /^#?([0-9a-fA-F]{6})$/.exec(String(hex || '#4DABF7'));
+        if (!m) return 0.3;
+        var num = parseInt(m[1], 16);
+        var vals = [(num >> 16) & 255, (num >> 8) & 255, num & 255].map(function (v) {
+          var s = v / 255;
+          return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+        });
+        return 0.2126 * vals[0] + 0.7152 * vals[1] + 0.0722 * vals[2];
+      }
+
+      function getAccentFg(hex) {
+        return getLuminance(hex) > 0.45 ? '#181c24' : '#ffffff';
+      }
+
+      function getAccentText(hex, isDarkTextTheme) {
+        return isDarkTextTheme && getLuminance(hex) > 0.55 ? '#9A7200' : hex;
+      }
+
+      function getItemLabel(item) {
+        if (typeof item.text === 'string' && item.text.length > 0) {
+          return item.text;
+        }
+        return state.isKo ? item.ko : item.en;
+      }
+
+      function cloneRoutineItem(item) {
+        if (typeof item.text === 'string' && item.text.length > 0) {
+          return { text: item.text, done: false };
+        }
+        return { ko: item.ko, en: item.en, done: false };
+      }
+
+      function showModalToast(msg) {
+        if (!modalToast) return;
+        modalToast.textContent = msg;
+        modalToast.hidden = false;
+        if (modalToastTimer) clearTimeout(modalToastTimer);
+        modalToastTimer = setTimeout(function () {
+          modalToast.hidden = true;
+        }, 1800);
+      }
 
       function formatTodayFull() {
         var d = new Date();
@@ -1086,16 +1276,22 @@
 
       function renderWidget() {
         var alpha = Math.max(4 / 255, (state.opacity / 100) * (180 / 255)).toFixed(4);
+        var accentFg = getAccentFg(state.accent);
+        var accentText = getAccentText(state.accent, state.darkText);
+
         demoWidget.style.background = state.darkText
           ? 'rgba(255, 255, 255, ' + alpha + ')'
           : 'rgba(18, 22, 32, ' + alpha + ')';
         demoWidget.style.setProperty('--accent', state.accent);
+        demoWidget.style.setProperty('--accent-fg', accentFg);
+        demoWidget.style.setProperty('--accent-text', accentText);
         demoWidget.classList.toggle('dark-ui', !state.darkText);
         demoWidget.classList.toggle('is-locked', state.locked);
 
         demoWidgetAccent.style.background = state.accent;
         modalAccent.style.background = state.accent;
         modalDoneBtn.style.background = state.accent;
+        modalDoneBtn.style.color = accentFg;
 
         demoTagText.textContent = (state.isKo ? '오늘의 루틴 · ' : "Today's Routine · ") + formatTodayFull();
         demoDayTitle.textContent = state.isKo ? DAY_FULL_KO[state.activeDay] : DAY_FULL_EN[state.activeDay];
@@ -1112,12 +1308,26 @@
           demoFlags.appendChild(lockSpan);
         }
 
+        wBtnText.textContent = state.isKo ? '가' : 'Aa';
+        wBtnText.title = state.isKo ? '글씨 색상 전환 (검정 ↔ 하얀)' : 'Toggle Text Color (Black / White)';
         wBtnText.style.color = state.darkText ? '#E67700' : '#333D4B';
+
         wBtnTopmost.innerHTML = SVG_PIN;
+        wBtnTopmost.title = state.isKo ? '항상 위에 표시 토글' : 'Toggle Always on Top';
         wBtnTopmost.style.color = state.topmost ? '#E67700' : '#4E5968';
+
         wBtnLock.innerHTML = state.locked ? SVG_LOCK : SVG_UNLOCK;
+        wBtnLock.title = state.isKo ? '위치·크기 잠금 토글' : 'Toggle Position & Size Lock';
         wBtnLock.style.color = state.locked ? '#E03131' : '#4E5968';
+
+        wBtnMini.title = state.isKo ? '투명도 및 포인트 컬러' : 'Opacity & Accent Color';
         wBtnMini.style.color = demoWidget.classList.contains('mini-open') ? '#228BE6' : '#4E5968';
+
+        wBtnEdit.title = state.isKo ? '루틴 편집 및 설정' : 'Edit Routines & Settings';
+        demoResizeGrip.title = state.isKo ? '드래그하여 크기 조절' : 'Drag corner to resize';
+        if (logoIcon) {
+          logoIcon.alt = state.isKo ? 'IMOE_ROUTINE 아이콘' : 'IMOE_ROUTINE Icon';
+        }
 
         demoRoutineList.innerHTML = '';
         var list = state.routines[state.activeDay] || [];
@@ -1140,7 +1350,7 @@
           }
           var txt = document.createElement('span');
           txt.className = 'widget-row-text';
-          txt.textContent = item.text;
+          txt.textContent = getItemLabel(item);
           li.appendChild(txt);
           demoRoutineList.appendChild(li);
         });
@@ -1191,6 +1401,7 @@
             btn.type = 'button';
             btn.className = (idx === 0 ? 'color-dot' : 'mini-chip') + (hex === state.accent ? ' active' : '');
             btn.style.background = hex;
+            btn.setAttribute('aria-label', hex);
             btn.addEventListener('click', function () {
               state.accent = hex;
               renderWidget();
@@ -1226,7 +1437,7 @@
             var row = document.createElement('div');
             row.className = 'modal-item-row';
             var span = document.createElement('span');
-            span.textContent = item.text;
+            span.textContent = getItemLabel(item);
             var del = document.createElement('button');
             del.type = 'button';
             del.className = 'modal-item-del';
@@ -1256,6 +1467,7 @@
 
       function closeEditModal() {
         editModal.classList.remove('open');
+        if (modalToast) modalToast.hidden = true;
       }
 
       function addModalItem() {
@@ -1321,6 +1533,11 @@
       editModal.addEventListener('click', function (e) {
         if (e.target === editModal) closeEditModal();
       });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && editModal.classList.contains('open')) {
+          closeEditModal();
+        }
+      });
 
       modalAddBtn.addEventListener('click', addModalItem);
       modalNewInput.addEventListener('keydown', function (e) {
@@ -1333,22 +1550,32 @@
 
       modalCopyWeekdays.addEventListener('click', function () {
         var src = state.routines[state.editDay] || [];
+        if (src.length === 0) {
+          showModalToast(state.isKo ? '복사할 루틴을 먼저 추가해 주세요' : 'Add a routine first to copy');
+          return;
+        }
         WEEKDAY_KEYS.forEach(function (k) {
           if (k !== state.editDay) {
-            state.routines[k] = src.map(function (it) { return { text: it.text, done: false }; });
+            state.routines[k] = src.map(cloneRoutineItem);
           }
         });
         renderWidget();
+        showModalToast(state.isKo ? '평일에 복사했어요' : 'Copied to weekdays');
       });
 
       modalCopyAll.addEventListener('click', function () {
         var src = state.routines[state.editDay] || [];
+        if (src.length === 0) {
+          showModalToast(state.isKo ? '복사할 루틴을 먼저 추가해 주세요' : 'Add a routine first to copy');
+          return;
+        }
         DAY_KEYS.forEach(function (k) {
           if (k !== state.editDay) {
-            state.routines[k] = src.map(function (it) { return { text: it.text, done: false }; });
+            state.routines[k] = src.map(cloneRoutineItem);
           }
         });
         renderWidget();
+        showModalToast(state.isKo ? '모든 요일에 복사했어요' : 'Copied to all days');
       });
 
       modalChkBox.addEventListener('change', function () {
@@ -1384,20 +1611,29 @@
           origL: demoWidget.offsetLeft,
           origT: demoWidget.offsetTop
         };
-        demoWidget.setPointerCapture(e.pointerId);
+        try { demoWidget.setPointerCapture(e.pointerId); } catch (_) {}
       });
 
       demoWidget.addEventListener('pointermove', function (e) {
         if (!dragging) return;
-        var maxL = demoCanvas.clientWidth - demoWidget.offsetWidth - 8;
-        var maxT = demoCanvas.clientHeight - demoWidget.offsetHeight - 8;
+        var maxL = Math.max(8, demoCanvas.clientWidth - demoWidget.offsetWidth - 8);
+        var maxT = Math.max(8, demoCanvas.clientHeight - demoWidget.offsetHeight - 8);
         var nextL = Math.max(8, Math.min(maxL, dragging.origL + (e.clientX - dragging.startX)));
         var nextT = Math.max(8, Math.min(maxT, dragging.origT + (e.clientY - dragging.startY)));
         demoWidget.style.left = nextL + 'px';
         demoWidget.style.top = nextT + 'px';
       });
 
-      demoWidget.addEventListener('pointerup', function () { dragging = null; });
+      function stopDemoDrag(e) {
+        if (!dragging) return;
+        dragging = null;
+        try {
+          if (e && demoWidget.hasPointerCapture(e.pointerId)) demoWidget.releasePointerCapture(e.pointerId);
+        } catch (_) {}
+      }
+      demoWidget.addEventListener('pointerup', stopDemoDrag);
+      demoWidget.addEventListener('pointercancel', stopDemoDrag);
+
       demoWidget.addEventListener('dblclick', function (e) {
         if (e.target.closest('button, input, .widget-row.checkable, .widget-hover-bar, .widget-mini-bar, #demoResizeGrip')) return;
         openEditModal();
@@ -1412,33 +1648,44 @@
           origW: demoWidget.offsetWidth,
           origH: demoWidget.offsetHeight
         };
-        demoResizeGrip.setPointerCapture(e.pointerId);
+        try { demoResizeGrip.setPointerCapture(e.pointerId); } catch (_) {}
       });
 
       demoResizeGrip.addEventListener('pointermove', function (e) {
         if (!resizing) return;
-        var maxW = demoCanvas.clientWidth - demoWidget.offsetLeft - 8;
-        var maxH = demoCanvas.clientHeight - demoWidget.offsetTop - 8;
+        var maxW = Math.max(220, demoCanvas.clientWidth - demoWidget.offsetLeft - 8);
+        var maxH = Math.max(150, demoCanvas.clientHeight - demoWidget.offsetTop - 8);
         var w = Math.max(220, Math.min(maxW, resizing.origW + (e.clientX - resizing.startX)));
         var h = Math.max(150, Math.min(maxH, resizing.origH + (e.clientY - resizing.startY)));
         demoWidget.style.width = w + 'px';
         demoWidget.style.height = h + 'px';
       });
 
-      demoResizeGrip.addEventListener('pointerup', function () { resizing = null; });
+      function stopDemoResize(e) {
+        if (!resizing) return;
+        resizing = null;
+        try {
+          if (e && demoResizeGrip.hasPointerCapture(e.pointerId)) demoResizeGrip.releasePointerCapture(e.pointerId);
+        } catch (_) {}
+      }
+      demoResizeGrip.addEventListener('pointerup', stopDemoResize);
+      demoResizeGrip.addEventListener('pointercancel', stopDemoResize);
 
       // Language toggle
       langBtn.addEventListener('click', function () {
         state.isKo = !state.isKo;
         document.documentElement.lang = state.isKo ? 'ko' : 'en';
+        document.title = state.isKo ? TITLE_KO : TITLE_EN;
         langBtn.textContent = state.isKo ? '🌐 English' : '🌐 한국어';
         document.querySelectorAll('[data-ko][data-en]').forEach(function (el) {
           var val = state.isKo ? el.getAttribute('data-ko') : el.getAttribute('data-en');
           if (val !== null) el.innerHTML = val;
         });
+        renderEmailLinks();
         renderWidget();
       });
 
+      renderEmailLinks();
       renderWidget();
     })();
   </script>
